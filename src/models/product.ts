@@ -13,6 +13,10 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   category: {
     type: Schema.Types.ObjectId,
     required: true,
