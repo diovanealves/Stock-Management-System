@@ -5,7 +5,7 @@ import { User } from "../../models/user";
 
 const userSchema = z.object({
   name: z.string().regex(/^[a-zA-Z]{2,}\s[a-zA-Z]{2,}$/),
-  email: z.string().regex(/^\w+([\.-]?\w+)*@(gmail|outlook)\.(com(\.br)?)$/),
+  email: z.string().email(),
   password: z
     .string()
     .regex(
