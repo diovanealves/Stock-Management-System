@@ -15,8 +15,8 @@ const purchaseOrderSchema = new Schema({
     default: "Entrada",
   },
   createdAt: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    required: true,
   },
   productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
 });
