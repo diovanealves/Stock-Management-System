@@ -2,7 +2,8 @@ import { model, Schema } from "mongoose";
 
 const orderSchema = new Schema({
   responsible: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   quantity: {

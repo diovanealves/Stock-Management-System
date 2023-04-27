@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { createUser } from "./useCases/user/createUser";
+import { listUser } from "./useCases/user/listUser";
 import { listCategories } from "./useCases/categories/listCategories";
 import { createCategory } from "./useCases/categories/createCategories";
 import { deleteCategories } from "./useCases/categories/deleteCategories";
@@ -15,6 +17,9 @@ import { updateSale } from "./useCases/exitOrder/updateSale";
 import { deleteSale } from "./useCases/exitOrder/deleteSale";
 
 const routes = Router();
+
+routes.get("/user", listUser);
+routes.post("/user", createUser);
 
 routes.get("/categories", listCategories);
 routes.post("/categories", createCategory);
