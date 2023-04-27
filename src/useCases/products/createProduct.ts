@@ -1,16 +1,26 @@
 import { Request, Response } from "express";
+import z from "zod";
 import { Product } from "../../models/product";
 
-export async function createProduct(req: Request, res: Response) {
-  const { name, description, quantity, price, category } = req.body;
+const productSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  quantity: z.number(),
+  price: z.number(),
+  categoryId: z.string(),
+});
 
+export async function createProduct(req: Request, res: Response) {
   try {
+    const { name, description, quantity, price, categoryId } =
+      productSchema.parse(req.body);
+
     const product = await Product.create({
       name,
       description,
       quantity,
       price,
-      category,
+      categoryId,
     });
     res.status(201).json(product);
   } catch (err) {

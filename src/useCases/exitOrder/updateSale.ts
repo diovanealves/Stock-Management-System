@@ -1,12 +1,20 @@
 import { Request, Response } from "express";
+import z from "zod";
 import dayjs from "dayjs";
 import { Product } from "../../models/product";
 import { Order } from "../../models/order";
 
-export async function updateSale(req: Request, res: Response) {
-  const { responsible, quantity, productId } = req.body;
+const updateSaleSchema = z.object({
+  responsible: z.string(),
+  quantity: z.number(),
+  productId: z.string(),
+});
 
+export async function updateSale(req: Request, res: Response) {
   try {
+    const { responsible, quantity, productId } = updateSaleSchema.parse(
+      req.body
+    );
     const formattedDate = dayjs().format("DD-MM-YYYY HH:mm");
 
     const updateProduct = await Product.findByIdAndUpdate(

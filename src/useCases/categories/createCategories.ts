@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
-
+import z from "zod";
 import { Category } from "../../models/category";
 
-export async function createCategory(req: Request, res: Response) {
-  const { name } = req.body;
+const categorySchema = z.object({
+  name: z.string(),
+});
 
+export async function createCategory(req: Request, res: Response) {
   try {
+    const { name } = categorySchema.parse(req.body);
+
     const category = await Category.create({
       name,
     });
