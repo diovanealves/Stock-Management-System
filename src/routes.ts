@@ -1,4 +1,3 @@
-import { purchaseOrder } from "./models/purchaseOrder";
 import { Router } from "express";
 
 import { listCategories } from "./useCases/categories/listCategories";
@@ -8,9 +7,12 @@ import { listProductsByCategory } from "./useCases/categories/listProductsByCate
 import { createProduct } from "./useCases/products/createProduct";
 import { listProduct } from "./useCases/products/listProducts";
 import { deleteProduct } from "./useCases/products/deleteProduct";
-import { updatePurchase } from "./useCases/purchaseOrder/updatePurchase";
-import { listPurchase } from "./useCases/purchaseOrder/listPurchase";
-import { deletePurchase } from "./useCases/purchaseOrder/deletePurchase";
+import { updatePurchase } from "./useCases/entryOrder/updatePurchase";
+import { listPurchase } from "./useCases/entryOrder/listPurchase";
+import { deletePurchase } from "./useCases/entryOrder/deletePurchase";
+import { listSale } from "./useCases/exitOrder/listSale";
+import { updateSale } from "./useCases/exitOrder/updateSale";
+import { deleteSale } from "./useCases/exitOrder/deleteSale";
 
 const routes = Router();
 
@@ -18,11 +20,17 @@ routes.get("/categories", listCategories);
 routes.post("/categories", createCategory);
 routes.delete("/categories/:categoryId", deleteCategories);
 routes.get("/categories/:categoryId/products", listProductsByCategory);
+
 routes.get("/products", listProduct);
 routes.post("/products", createProduct);
 routes.delete("/products/:productId", deleteProduct);
-routes.get("/purchase", listPurchase);
-routes.put("/purchase", updatePurchase);
-routes.delete("/purchase/:purchaseId", deletePurchase);
+
+routes.get("/entryOrder", listPurchase);
+routes.put("/entryOrder", updatePurchase);
+routes.delete("/entryOrder/:purchaseId", deletePurchase);
+
+routes.get("/exitOrder", listSale);
+routes.put("/exitOrder", updateSale);
+routes.delete("/exitOrder/:deleteSale", deleteSale);
 
 export default routes;
