@@ -6,6 +6,6 @@ export async function listSale(req: Request, res: Response) {
     const order = await Order.find({ status: "Saída" });
     res.json(order);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error listing outputs", message: err });
   }
 }

@@ -24,6 +24,6 @@ export async function createProduct(req: Request, res: Response) {
     });
     res.status(201).json(product);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error creating product", message: err });
   }
 }

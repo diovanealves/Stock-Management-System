@@ -22,6 +22,6 @@ export async function deleteSale(req: Request, res: Response) {
     await Order.deleteOne();
     res.status(200).send(updatedProduct);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error deleting an output", message: err });
   }
 }

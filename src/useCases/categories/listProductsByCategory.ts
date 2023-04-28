@@ -7,6 +7,8 @@ export async function listProductsByCategory(req: Request, res: Response) {
     const products = await Product.where("categoryId", categoryId);
     res.json(products);
   } catch (err) {
-    res.status(500).send(err);
+    res
+      .status(500)
+      .send({ error: "Error listing a product by category", message: err });
   }
 }

@@ -6,8 +6,8 @@ export async function deleteProduct(req: Request, res: Response) {
 
   try {
     await Product.findByIdAndDelete(productId);
-    res.status(204).send();
+    res.status(204).send({ message: "product deleted successfully" });
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error deleting product", message: err });
   }
 }

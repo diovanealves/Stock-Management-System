@@ -7,6 +7,6 @@ export async function deleteCategories(req: Request, res: Response) {
     await Category.findByIdAndDelete(categoryId);
     res.status(204).send();
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error deleting a category", message: err });
   }
 }

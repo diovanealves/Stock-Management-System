@@ -14,7 +14,7 @@ const forgotPasswordSchema = z.object({
 
 export async function forgotPasswordUser(req: Request, res: Response) {
   try {
-    const { email } = forgotPasswordSchema.parse(req.body);
+    const { email } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) return res.status(400).send({ error: "User not found" });

@@ -34,6 +34,6 @@ export async function updatePurchase(req: Request, res: Response) {
 
     return res.status(201).json(updateProduct);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error adding an entry", message: err });
   }
 }

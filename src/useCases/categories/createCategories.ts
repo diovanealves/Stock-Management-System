@@ -15,6 +15,6 @@ export async function createCategory(req: Request, res: Response) {
     });
     res.status(201).json(category);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error creating a category", message: err });
   }
 }

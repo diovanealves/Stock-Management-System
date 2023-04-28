@@ -45,6 +45,6 @@ export async function resetPassword(req: Request, res: Response) {
 
     res.status(200).send({ message: "Password changed successfully" });
   } catch (err) {
-    res.status(500).send({ message: err });
+    res.status(500).send({ error: "Password reset error", message: err });
   }
 }

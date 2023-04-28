@@ -6,6 +6,8 @@ export async function listCategories(req: Request, res: Response) {
     const categories = await Category.find();
     res.json(categories);
   } catch (err) {
-    res.status(500).send(err);
+    res
+      .status(500)
+      .send({ error: "Error listing the categories", message: err });
   }
 }

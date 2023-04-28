@@ -42,6 +42,6 @@ export async function updateSale(req: Request, res: Response) {
 
     return res.status(201).json(updateProduct);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: "Error when adding output", message: err });
   }
 }
