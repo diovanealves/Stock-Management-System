@@ -19,26 +19,24 @@ export async function forgotPasswordUser(req: Request, res: Response) {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).send({ error: "User not found" });
 
-    const resetToken =
+    const token =
       crypto.randomBytes(3).toString("hex") + crypto.randomInt(100, 999);
     const tokenExpiration = dayjs().add(1, "hour").format("HH.mm");
 
     const updatedToken = await User.findOneAndUpdate(
       { _id: user.id },
       {
-        resetToken: resetToken,
+        resetToken: token,
         resetTokenExpiration: tokenExpiration,
       },
       { new: true }
     );
 
-    await transporter.sendMail({
-      to: email,
-      subject: "Reset Password",
-      html: `
-      <p>Você solicitou a redefinição de sua senha.</p>
-      <p>Aqui está seu token para redefinir a senha ${resetToken}</p>
-    `,
+    transporter.sendMail({
+      to: user.email,
+      subject: "Código para alteração da senha",
+      template: "auth/forgotPassword",
+      context: { token: token, user: user.name },
     });
 
     res.status(200).send({ message: "Email sent successfully" });
