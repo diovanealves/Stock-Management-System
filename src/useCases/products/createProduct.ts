@@ -8,11 +8,12 @@ const productSchema = z.object({
   quantity: z.number(),
   price: z.number(),
   categoryId: z.string(),
+  responsible: z.string(),
 });
 
 export async function createProduct(req: Request, res: Response) {
   try {
-    const { name, description, quantity, price, categoryId } =
+    const { name, description, quantity, price, categoryId, responsible } =
       productSchema.parse(req.body);
 
     const product = await Product.create({
@@ -21,6 +22,7 @@ export async function createProduct(req: Request, res: Response) {
       quantity,
       price,
       categoryId,
+      responsible,
     });
     res.status(201).json(product);
   } catch (err) {

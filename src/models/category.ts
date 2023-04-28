@@ -5,6 +5,11 @@ const categorySchema = new Schema({
     type: String,
     required: true,
   },
+  responsible: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 export const Category = model("Category", categorySchema);

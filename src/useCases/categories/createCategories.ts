@@ -4,14 +4,16 @@ import { Category } from "../../models/category";
 
 const categorySchema = z.object({
   name: z.string(),
+  responsible: z.string(),
 });
 
 export async function createCategory(req: Request, res: Response) {
   try {
-    const { name } = categorySchema.parse(req.body);
+    const { name, responsible } = categorySchema.parse(req.body);
 
     const category = await Category.create({
       name,
+      responsible,
     });
     res.status(201).json(category);
   } catch (err) {

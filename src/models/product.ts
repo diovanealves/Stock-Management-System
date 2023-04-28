@@ -22,6 +22,11 @@ const productSchema = new Schema({
     required: true,
     ref: "Category",
   },
+  responsible: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 export const Product = model("Product", productSchema);

@@ -4,36 +4,44 @@ import dayjs from "dayjs";
 import { Product } from "../../models/product";
 import { Order } from "../../models/order";
 
-const updatePurchaseSchema = z.object({
+const updateSaleSchema = z.object({
   responsible: z.string(),
   quantity: z.number(),
-  status: z.enum(["Entrada", "Devolução"]),
   productId: z.string(),
 });
 
-export async function updatePurchase(req: Request, res: Response) {
+export async function createSale(req: Request, res: Response) {
   try {
-    const { responsible, quantity, status, productId } =
-      updatePurchaseSchema.parse(req.body);
+    const { responsible, quantity, productId } = updateSaleSchema.parse(
+      req.body
+    );
     const formattedDate = dayjs().format("DD-MM-YYYY HH:mm");
 
     const updateProduct = await Product.findByIdAndUpdate(
       productId,
-      { $inc: { quantity: +quantity } },
+      { $inc: { quantity: -quantity } },
       { new: true }
     );
+
+    if (!updateProduct) return res.status(400).send("Produto não encontrado");
+
+    if (updateProduct?.quantity <= 0) {
+      return res
+        .status(400)
+        .send("Quantidade maior do que a disponível em estoque");
+    }
 
     const input = new Order({
       productId: productId,
       responsible: responsible,
       quantity: quantity,
       createdAt: formattedDate,
-      status: status,
+      status: "Saída",
     });
     await input.save();
 
     return res.status(201).json(updateProduct);
   } catch (err) {
-    res.status(500).send({ error: "Error adding an entry", message: err });
+    res.status(500).send({ error: "Error when adding output", message: err });
   }
 }

@@ -12,11 +12,11 @@ import { listProductsByCategory } from "./useCases/categories/listProductsByCate
 import { createProduct } from "./useCases/products/createProduct";
 import { listProduct } from "./useCases/products/listProducts";
 import { deleteProduct } from "./useCases/products/deleteProduct";
-import { updatePurchase } from "./useCases/entryOrder/updatePurchase";
+import { createPurchase } from "./useCases/entryOrder/createPurchase";
 import { listPurchase } from "./useCases/entryOrder/listPurchase";
 import { deletePurchase } from "./useCases/entryOrder/deletePurchase";
 import { listSale } from "./useCases/exitOrder/listSale";
-import { updateSale } from "./useCases/exitOrder/updateSale";
+import { createSale } from "./useCases/exitOrder/createSale";
 import { deleteSale } from "./useCases/exitOrder/deleteSale";
 
 const routes = Router();
@@ -37,11 +37,11 @@ routes.post("/products", createProduct);
 routes.delete("/products/:productId", deleteProduct);
 
 routes.get("/entryOrder", listPurchase);
-routes.put("/entryOrder", updatePurchase);
+routes.put("/entryOrder", createPurchase);
 routes.delete("/entryOrder/:purchaseId", deletePurchase);
 
 routes.get("/exitOrder", listSale);
-routes.put("/exitOrder", updateSale);
+routes.put("/exitOrder", createSale);
 routes.delete("/exitOrder/:deleteSale", deleteSale);
 
 export default routes;
