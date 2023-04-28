@@ -21,6 +21,14 @@ const UserSchema = new Schema({
     type: String,
     require: true,
   },
+  resetToken: {
+    type: String,
+    select: false,
+  },
+  resetTokenExpiration: {
+    type: String,
+    select: false,
+  },
 });
 
 UserSchema.pre("save", async function (next) {

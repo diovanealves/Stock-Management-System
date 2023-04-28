@@ -18,7 +18,7 @@ export async function authenticateUser(req: Request, res: Response) {
     if (!(await bcrypt.compare(password, user.password)))
       return res.status(400).send({ error: "Invalid password" });
 
-    res.json(user);
+    res.status(200).send({ message: "Account successfully logged in" });
   } catch (err) {
     res
       .status(500)
