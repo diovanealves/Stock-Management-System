@@ -70,6 +70,7 @@ GET      /categories/:categoryId/products       Buscar produtos por categoria
 # Rota Produtos
 GET      /products                  Buscar produtos
 POST     /products                  Criar produto com Nome, Quantidade, Preço e Categoria
+POST     /products/:productId      Listar Ordens de um produto específico
 DELETE   /products/:productId       Deletar o produto criado
 
 # Rota Entrada
