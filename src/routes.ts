@@ -18,6 +18,7 @@ import { deletePurchase } from "./useCases/entryOrder/deletePurchase";
 import { listSale } from "./useCases/exitOrder/listSale";
 import { createSale } from "./useCases/exitOrder/createSale";
 import { deleteSale } from "./useCases/exitOrder/deleteSale";
+import { ListProductByOrder } from "./useCases/products/listProductByOrder";
 
 const routes = Router();
 
@@ -34,6 +35,7 @@ routes.get("/categories/:categoryId/products", listProductsByCategory);
 
 routes.get("/products", listProduct);
 routes.post("/products", createProduct);
+routes.post("/products/:productId", ListProductByOrder);
 routes.delete("/products/:productId", deleteProduct);
 
 routes.get("/entryOrder", listPurchase);
